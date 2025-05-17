@@ -20,3 +20,6 @@ FROM product
 WHERE
     product_price > 1000
     OR product_stock = FALSE;
+
+    SELECT * FROM product WHERE NOT product_stock = FALSE;
+    

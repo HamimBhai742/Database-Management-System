@@ -19,3 +19,10 @@ ALTER Table product
 ADD constraint product_name_unique UNIQUE (product_name);
 
 ALTER TABLE product DROP CONSTRAINT product_name_unique;
+
+ALTER Table product ADD COLUMN email VARCHAR(25) UNIQUE;
+
+ALTER Table product DROP COLUMN email ;
+
+ALTER TABLE product ADD COLUMN email VARCHAR(25);
+
