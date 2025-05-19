@@ -39,3 +39,5 @@ DROP TABLE users;
 SELECT * FROM users;
 SELECT * FROM post;
 delete from users where id=7;
+
+select title,content,name,email,age from post join users on post.user_id=users.id;
