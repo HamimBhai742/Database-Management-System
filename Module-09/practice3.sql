@@ -131,3 +131,6 @@ VALUES ('Isaac Asimov', 1920, 'Russia');
 
 --Display the total number of members.
 select count(*) from members;
+
+--Show all borrowings that have not been returned yet.
+select * from borrowings where borrowings.return_date is null;

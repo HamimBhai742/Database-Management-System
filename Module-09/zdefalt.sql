@@ -2,3 +2,4 @@
 SELECT * FROM authors;
 SELECT * FROM books;
 SELECT * FROM members;
+SELECT * FROM borrowings;
