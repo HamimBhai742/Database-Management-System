@@ -140,3 +140,6 @@ select DISTINCT category from books;
 
 --Find the number of books available for each category
 select category,count(*) from books GROUP BY category;
+
+--Display the name of the member who borrowed the book titled '1984'
+SELECT name from books INNER JOIN borrowings USING(book_id) INNER JOIN members USING(member_id) WHERE title = '1984' ;
