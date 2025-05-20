@@ -111,7 +111,20 @@ select name,email from members;
 select count(*) from books where category= 'History';
 
 --Find the title of the book borrowed by the member with ID 3
-select title from books INNER JOIN Borrowings USING(book_id) where member_id = 3;
+select title,member_id,book_id from books INNER JOIN Borrowings USING(book_id) where member_id = 5;
 
 --Display the name and borrowed_date of all members who borrowed a book in January 2023
 select name,borrowed_date from Borrowings INNER JOIN members USING(member_id) where extract(month from borrowed_date::date) = 1 and extract(year from borrowed_date::date) = 2023;
+
+
+-- List all books authored by 'George Orwell'
+
+
+select title from books INNER JOIN authors USING(author_id) where name = 'George Orwell';
+
+--Find all authors who were born before 1950.
+select name from authors where authors.birth_year <1950;
+
+-- Insert a new author into the Authors table.
+INSERT INTO Authors (author_id, name, birth_year, country)
+VALUES (5, 'Isaac Asimov', 1920, 'Russia');
