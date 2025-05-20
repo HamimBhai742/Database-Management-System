@@ -126,5 +126,8 @@ select title from books INNER JOIN authors USING(author_id) where name = 'George
 select name from authors where authors.birth_year <1950;
 
 -- Insert a new author into the Authors table.
-INSERT INTO Authors (author_id, name, birth_year, country)
-VALUES (5, 'Isaac Asimov', 1920, 'Russia');
+INSERT INTO Authors ( name, birth_year, country)
+VALUES ('Isaac Asimov', 1920, 'Russia');
+
+--Display the total number of members.
+select count(*) from members;
