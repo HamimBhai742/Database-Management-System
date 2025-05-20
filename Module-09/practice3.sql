@@ -134,3 +134,6 @@ select count(*) from members;
 
 --Show all borrowings that have not been returned yet.
 select * from borrowings where borrowings.return_date is null;
+
+-- List all unique categories of books in the library.
+select DISTINCT category from books;
