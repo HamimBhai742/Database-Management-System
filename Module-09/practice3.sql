@@ -143,3 +143,6 @@ select category,count(*) from books GROUP BY category;
 
 --Display the name of the member who borrowed the book titled '1984'
 SELECT name from books INNER JOIN borrowings USING(book_id) INNER JOIN members USING(member_id) WHERE title = '1984' ;
+
+--Find the total number of books borrowed by each member.
+select member_id,count(*) from  borrowings GROUP BY member_id;
