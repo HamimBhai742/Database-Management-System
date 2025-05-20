@@ -137,3 +137,6 @@ select * from borrowings where borrowings.return_date is null;
 
 -- List all unique categories of books in the library.
 select DISTINCT category from books;
+
+--Find the number of books available for each category
+select category,count(*) from books GROUP BY category;
