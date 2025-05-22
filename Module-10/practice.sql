@@ -6,11 +6,16 @@ create table students(
   age int NOT NULL,
   score INT NOT NULL ,
   department_id int REFERENCES departments(id),
-)
+);
 
 create table departments(
   id serial PRIMARY KEY,
   name char(4) NOT NULL,
-)
+);
 
-c
+create table course_enrollments(
+  id serial PRIMARY KEY,
+  student_id int REFERENCES students(id),
+  course_title varchar(100) NOT NULL,
+  enrollment_date date NOT NULL
+);
