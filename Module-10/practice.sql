@@ -2,22 +2,22 @@
 
 create table students(
   id serial PRIMARY KEY,
-  name varchar(100) NOT NULL,
-  age int NOT NULL,
-  score INT NOT NULL ,
+  name varchar(100) ,
+  age int ,
+  score INT  ,
   department_id int REFERENCES departments(id)
 );
 
 create table departments(
   id serial PRIMARY KEY,
-  name char(4) NOT NULL
+  name char(4)
 );
 
 create table course_enrollments(
   id serial PRIMARY KEY,
   student_id int REFERENCES students(id),
   course_title varchar(100) NOT NULL,
-  enrollment_date date NOT NULL
+  enrollment_date date
 );
 insert into departments (name) values
 
@@ -102,8 +102,18 @@ insert into course_enrollments (student_id, course_title, enrollment_date) value
 (6, 'Web Development', '2023-06-18'),
 (7, 'Machine Learning', '2023-07-25'),
 (8, 'Artificial Intelligence', '2023-08-30'),
-(9, 'Cybersecurity', '2023-09-15'),
-(10, 'Cloud Computing', '2023-10-20');
+(9, 'Cybersecurity', NULL),
+(10, 'Cloud Computing', '2023-10-20'),
+(1, 'Database Systems', '2023-01-15'),
+(2, 'Data Structures', NULL),
+(3, 'Operating Systems', '2023-03-10'),
+(4, 'Computer Networks', '2023-04-05'),
+(5, 'Software Engineering', '2023-05-12'),
+(6, 'Web Development', NULL),
+(7, 'Machine Learning', '2023-07-25'),
+(8, 'Artificial Intelligence', '2023-08-30'),
+(9, 'Cybersecurity', NULL),
+(10, 'Cloud Computing', NULL);
 
 --Retrieve all students who scored higher than the average score
 select * from students;
@@ -117,7 +127,8 @@ select round(avg(age)) from students);
 
 --Get names of students who are enrolled in any course (use IN with subquery).
 
-SELECT * FROM (SELECT name,course_title FROM students INNER JOIN course_enrollments USING(id));
+select name from students s WHERE s.id IN (select student_id from course_enrollments
+);
 
 --Retrieve departments with at least one student scoring above 90 (use EXISTS).
 
@@ -132,4 +143,13 @@ as
 SELECT name,department_id,score FROM students;
 
 SELECT * FROM students_view;
+
+--Create a view that lists all students enrolled in any course with the enrollment date.
+
+create view enrolled_students_view_1
+as
+SELECT name, course_title,enrollment_date
+FROM students
+JOIN course_enrollments  USING(id) WHERE enrollment_date is NOT NULL;
+SELECT * FROM enrolled_students_view_1;
 
