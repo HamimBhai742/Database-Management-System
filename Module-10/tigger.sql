@@ -35,7 +35,11 @@ EXECUTE FUNCTION delete_user();
 --delete user
 delete from users where id=5;
 
-select * from users;
+EXPLAIN ANALYSE
+select * from  employees WHERE employee_id=5;
 
+CREATE INDEX idx_employee_id
+ON employees(employee_id);
 SELECT * FROM deleted_users;
+SHOW data_directory;
 
