@@ -19,7 +19,6 @@ create table course_enrollments(
   course_title varchar(100) NOT NULL,
   enrollment_date date NOT NULL
 );
-
 insert into departments (name) values
 
 ('CSE'),
@@ -54,7 +53,6 @@ insert into departments (name) values
 ('CE'),
 ('ENG'),
 ('ME');
-
 insert into students (name, age, score, department_id) values
 ('John Doe', 20, 85, 1),
 ('Jane Smith', 22, 90, 2),
@@ -85,8 +83,6 @@ insert into students (name, age, score, department_id) values
 ('Yara Brown', 22, 89, 7),
 ('Zoe Lee', 19, 74, 8)
 ;
-
-
 insert into course_enrollments (student_id, course_title, enrollment_date) values
 (1, 'Database Systems', '2023-01-15'),
 (2, 'Data Structures', '2023-02-20'),
@@ -108,3 +104,9 @@ insert into course_enrollments (student_id, course_title, enrollment_date) value
 (8, 'Artificial Intelligence', '2023-08-30'),
 (9, 'Cybersecurity', '2023-09-15'),
 (10, 'Cloud Computing', '2023-10-20');
+
+--Retrieve all students who scored higher than the average score
+select * from students;
+select * from students where score>(select round(avg(score)) from students
+);
+
