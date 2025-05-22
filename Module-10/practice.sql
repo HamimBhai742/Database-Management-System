@@ -8,4 +8,9 @@ create table students(
   department_id int REFERENCES departments(id),
 )
 
-crea
+create table departments(
+  id serial PRIMARY KEY,
+  name char(4) NOT NULL,
+)
+
+c
