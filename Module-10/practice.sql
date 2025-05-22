@@ -110,3 +110,13 @@ select * from students;
 select * from students where score>(select round(avg(score)) from students
 );
 
+--Find students whose age is greater than the average age of all students.
+
+select * from students where age > (
+select round(avg(age)) from students);
+
+--Get names of students who are enrolled in any course (use IN with subquery).
+
+SELECT * FROM (SELECT name,course_title FROM students INNER JOIN course_enrollments USING(id));
+
+
