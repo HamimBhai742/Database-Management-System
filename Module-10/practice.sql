@@ -119,4 +119,10 @@ select round(avg(age)) from students);
 
 SELECT * FROM (SELECT name,course_title FROM students INNER JOIN course_enrollments USING(id));
 
+--Retrieve departments with at least one student scoring above 90 (use EXISTS).
+
+SELECT * FROM departments d WHERE EXISTS (
+  SELECT 1 FROM students s WHERE s.department_id = d.id AND s.score > 90
+);
+
 
