@@ -125,4 +125,11 @@ SELECT * FROM departments d WHERE EXISTS (
   SELECT 1 FROM students s WHERE s.department_id = d.id AND s.score > 90
 );
 
+--Create a view to show each student’s name, department, and score.
+
+create view students_view
+as
+SELECT name,department_id,score FROM students;
+
+SELECT * FROM students_view;
 
