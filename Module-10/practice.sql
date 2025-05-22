@@ -85,3 +85,26 @@ insert into students (name, age, score, department_id) values
 ('Yara Brown', 22, 89, 7),
 ('Zoe Lee', 19, 74, 8)
 ;
+
+
+insert into course_enrollments (student_id, course_title, enrollment_date) values
+(1, 'Database Systems', '2023-01-15'),
+(2, 'Data Structures', '2023-02-20'),
+(3, 'Operating Systems', '2023-03-10'),
+(4, 'Computer Networks', '2023-04-05'),
+(5, 'Software Engineering', '2023-05-12'),
+(6, 'Web Development', '2023-06-18'),
+(7, 'Machine Learning', '2023-07-25'),
+(8, 'Artificial Intelligence', '2023-08-30'),
+(9, 'Cybersecurity', '2023-09-15'),
+(10, 'Cloud Computing', '2023-10-20'),
+(1, 'Database Systems', '2023-01-15'),
+(2, 'Data Structures', '2023-02-20'),
+(3, 'Operating Systems', '2023-03-10'),
+(4, 'Computer Networks', '2023-04-05'),
+(5, 'Software Engineering', '2023-05-12'),
+(6, 'Web Development', '2023-06-18'),
+(7, 'Machine Learning', '2023-07-25'),
+(8, 'Artificial Intelligence', '2023-08-30'),
+(9, 'Cybersecurity', '2023-09-15'),
+(10, 'Cloud Computing', '2023-10-20');
