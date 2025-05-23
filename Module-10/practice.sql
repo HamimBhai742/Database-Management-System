@@ -269,4 +269,34 @@ SELECT * FROM logs_enrollment;
 
 --Add a trigger that sets the score to 0 if a new student record is added without a score.
 
+CREATE OR REPLACE FUNCTION set_default_score()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+  IF NEW.score IS NULL THEN
+    NEW.score := 0;
+  END IF;
+  RETURN NEW;
+END;
+$$
 
+--create tigger
+CREATE or REPLACE TRIGGER set_score_trigger
+BEFORE INSERT ON students
+FOR EACH ROW
+EXECUTE FUNCTION set_default_score();
+--Insert a new student without a score to test the trigger.
+
+INSERT INTO students (name, age, department_id, score)
+VALUES ('Test Student 3', 21, 1,46);
+
+--Add an index to the score column in the students table.
+
+CREATE INDEX idx_student_score
+ON students(score);
+
+
+EXPLAIN ANALYSE
+SELECT score FROM students ;
