@@ -300,3 +300,11 @@ ON students(score);
 
 EXPLAIN ANALYSE
 SELECT score FROM students ;
+
+--Add a composite index on student_id and enrolled_on in the course_enrollments table.
+
+CREATE INDEX idx_student_enrollment
+ON course_enrollments(student_id, enrollment_date);
+
+EXPLAIN ANALYSE
+SELECT student_id, enrollment_date FROM course_enrollments;
