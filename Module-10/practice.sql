@@ -238,3 +238,35 @@ END
 $$
 
 
+--create table for enrollment logs
+CREATE Table logs_enrollment
+(
+  course_title varchar(100) NOT NULL,
+  created_at timestamp DEFAULT now()
+);
+--Create a trigger that automatically logs enrollment when a student is added to course_enrollments.
+CREATE OR REPLACE FUNCTION log_enrollment()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+  INSERT INTO logs_enrollment ( course_title, created_at)
+  VALUES (NEW.course_title,now());
+  RETURN NEW;
+END;
+$$
+
+CREATE TRIGGER enrollment_trigger
+AFTER INSERT ON course_enrollments
+FOR EACH ROW
+EXECUTE FUNCTION log_enrollment();
+--Insert a new student and trigger the enrollment log.
+INSERT INTO course_enrollments (student_id, course_title, enrollment_date)
+VALUES (1, 'Database Systems', '2023-01-15');
+
+SELECT * FROM logs_enrollment;
+
+--Add a trigger that sets the score to 0 if a new student record is added without a score.
+
+
