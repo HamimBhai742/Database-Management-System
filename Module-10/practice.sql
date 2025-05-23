@@ -306,5 +306,9 @@ SELECT score FROM students ;
 CREATE INDEX idx_student_enrollment
 ON course_enrollments(student_id, enrollment_date);
 
+--Compare query performance with and without indexes using EXPLAIN.
+
+
+
 EXPLAIN ANALYSE
 SELECT student_id, enrollment_date FROM course_enrollments;
