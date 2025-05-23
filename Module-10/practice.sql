@@ -153,3 +153,88 @@ FROM students
 JOIN course_enrollments  USING(id) WHERE enrollment_date is NOT NULL;
 SELECT * FROM enrolled_students_view_1;
 
+--Create a function that takes a student's score and returns a grade (e.g., A, B, C, F).
+create or replace function get_grade(p_score INT)
+returns varchar(2)
+LANGUAGE plpgsql
+as
+$$
+BEGIN
+  IF p_score >= 90 THEN
+    RETURN 'A';
+  ELSIF p_score >= 80 THEN
+    RETURN 'B';
+  ELSIF p_score >= 70 THEN
+    RETURN 'C';
+  ELSE
+    RETURN 'F';
+  END IF;
+END;
+$$
+
+SELECT get_grade(55);
+
+--Create a function that returns the full name and department of a student by ID
+
+create or REPLACE Function getStudentInfo(p_id int)
+RETURNS TABLE
+(
+  name varchar(100),
+  department_id INT
+)
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+RETURN QUERY
+SELECT s.name,s.department_id from students s WHERE s.id = p_id;
+END
+$$
+SELECT * from  getStudentInfo(7);
+
+
+--Write a stored procedure to update a student's department.
+CREATE OR REPLACE PROCEDURE update_student_department(p_id INT, p_department_id INT)
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+UPDATE students
+SET department_id=p_department_id WHERE id = p_id;
+END
+$$
+
+CALL update_student_department(1, 2);
+
+SELECT * FROM students;
+
+
+--Write a procedure to delete students who haven't enrolled in any course.
+
+create or replace procedure delete_students_without_enrollment()
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+DELETE FROM students
+WHERE id NOT IN (SELECT DISTINCT student_id FROM course_enrollments);
+END
+$$
+
+CALL delete_students_without_enrollment();
+SELECT * FROM students;
+SELECT * FROM course_enrollments;
+
+--update course_enrollments set enrollment_date = NULL where student_id = 1;
+
+CREATE OR REPLACE PROCEDURE update_course_enrollment(p_id INT, p_student_id INT)
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+UPDATE course_enrollments
+SET student_id=p_student_id WHERE id = p_id;
+END
+$$
+
+
